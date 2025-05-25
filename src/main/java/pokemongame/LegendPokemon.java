@@ -17,17 +17,17 @@ public class LegendPokemon extends Pokemon {
 //        super(pokemonName, customName, HP, pokeCategory);
 //    }
 
-    // enum 과 같은 자동 생성자 호출 방식이 아닌,
-    // 커스텀 로직에 따른 Singleton 구현 코드를 작성할 수 있음!
+    // Not an automatic constructor call method like enum,
+    // Can write Singleton implementation code according to custom logic!
     public static LegendPokemon getLegend(String newLegend) {
-        // 기존 객체가 있는지, Dex 등재 되어있는지 검사!
-        // 기존 객체 있으면 null 리턴
+        // Check if there is an existing object, if it is registered in Dex!
+        // Return null if there is an existing object
         if (existingLegend.contains(newLegend)) return null;
-        // 사전 등재 안되어 있으면 null 리턴
+        // Return null if not registered in advance
         LegendPokemon dexLegend = (LegendPokemon) PokeDex.pokemonByName.get(newLegend);
         if (dexLegend == null) return null;
 
-        // 없으면 새로운 Legend 포켓몬 리턴!
+        // If not, return a new Legend Pokemon!
         LegendPokemon newLegendObj = new LegendPokemon(
             dexLegend.getPokemonName(), dexLegend.getHP(), dexLegend.getPokeCategory()
         );

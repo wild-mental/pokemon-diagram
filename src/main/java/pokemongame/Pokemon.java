@@ -7,13 +7,13 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Pokemon implements IPokemon {
-    private String pokemonName;  // 포켓몬의 종류 이름
+    private String pokemonName;  // Name of the type of Pokemon
     @Setter
     private String customName;
     private int HP;
     private PokeDex.PokeCategory pokeCategory;
 
-    // PokeDex 전용 생성자
+    // Constructor for PokeDex only
     public Pokemon(
         String pokemonName,
         int HP, PokeDex.PokeCategory pokeCategory) {
@@ -22,7 +22,7 @@ public class Pokemon implements IPokemon {
         this.pokeCategory = pokeCategory;
     }
 
-    // 플레이어 소유 포켓몬 생성자
+    // Constructor for player-owned Pokemon
     public Pokemon(
         String pokemonName, String customName,
         int HP, PokeDex.PokeCategory pokeCategory) {
@@ -34,18 +34,18 @@ public class Pokemon implements IPokemon {
 
     @Override
     public void attack(Pokemon tgPokemon) {
-        // 데이터 및 동작 : tgPokemon.getHP(), tgPokemon.setHP()
-        // 그 외 추가 동작 및 결과 출력
+        // Data and actions: tgPokemon.getHP(), tgPokemon.setHP()
+        // Other additional actions and result output
     }
 
     @Override
     public void flee(int enemyLv) {
-        // 결과 출력
+        // Result output
     }
 
     @Override
     public Pokemon evolve() {
-        // 데이터 및 동작
+        // Data and actions
         EvolvedPokemon evolveTo = PokeDex.getEvolveForm(this.pokemonName);
         System.out.println("== Evolve To: " + evolveTo.getPokemonName() + " ==");
         return new EvolvedPokemon(

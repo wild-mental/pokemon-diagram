@@ -4,10 +4,10 @@ import java.lang.reflect.Field;
 
 public class GameLauncher {
     public static void main(String[] args) {
-        // 트레이드용 더미 데이터 생성
-        Trainer trainer1 = new Trainer();  // 특수 이벤트 1번 포켓몬 보유
-        Trainer trainer2 = new Trainer();  // 특수 이벤트 2번 포켓몬 보유
-        //   1-2. 트레이너의 보유 포켓몬
+        // Create dummy data for trade
+        Trainer trainer1 = new Trainer();  // Owns special event Pokemon number 1
+        Trainer trainer2 = new Trainer();  // Owns special event Pokemon number 2
+        //   Trainer's owned Pokemon
         Pokemon[] trainer1Pokemon = {
             new MysticPokemon("근육몬", "내근육몬0", 10, PokeDex.PokeCategory.MYSTIC),
             new MysticPokemon("근육몬", "내근육몬1", 10, PokeDex.PokeCategory.MYSTIC),
@@ -20,9 +20,19 @@ public class GameLauncher {
             new MysticPokemon("킹스톤", "니킹스톤2", 10, PokeDex.PokeCategory.MYSTIC),
         };
         trainer2.getPokemon(trainer2Pokemon);
-        // trainer1.trade(trainer2);  // 트레이드 한방에 처리하자!
-        // TODO 1) 감춰진 신비의 요소값을 추가
-        //   Mystic 포켓몬에 사용자에게는 공개되지 않은 동작 제어 요소를 추가하고 확인해보기 : Reflection 적용!
+        // Let's handle the trade in one go!
+        // Add hidden mystical element value
+        // Add and check an action control element that is not disclosed to the user in Mystic Pokemon: Apply Reflection!
+        // In case @Getter is prohibited from being applied to that part
+        // (e.g., not my code, belongs to another project/package, need to minimize code changes)
+        // Perform multiple operations to test hidden values
+        // Retrieve hidden field values through Reflect
+        // Access prevention through encapsulation
+        // There is a class called Class as a metaprogramming tool!
+        // Allows access to the class blueprint as data
+        // Only a separate structure from the object data is derived
+        // Release private access control
+        // Mystical evolution/transformation Factor number: 
         MysticPokemon myMystic = new MysticPokemon("킹스톤", "Reflection_킹스톤", 10, PokeDex.PokeCategory.MYSTIC);
         // System.out.println(myMystic.getMysticFactor());
         // 해당 부분이 @Getter 적용이 금지되어 있는 경우

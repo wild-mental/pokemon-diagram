@@ -12,8 +12,8 @@ public class Trainer implements ITrainer {
 
     @Override
     public void hunt(Pokemon wildPokemon) {
-        System.out.println("야생의 포켓몬 " + wildPokemon.getPokemonName() + "을(를) 만났습니다!");
-        // 야생의 포켓몬을 만나서 싸우거나 잡거나 그냥 지나가거나
+        System.out.println("Encounter a wild Pokemon " + wildPokemon.getPokemonName() + "!");
+        // Encounter a wild Pokemon and either fight, capture, or pass by
         System.out.println("1: battle / 2: capture / else: pass");
         int battleOrCapture = inputReader.nextInt();
         switch (battleOrCapture) {
@@ -31,7 +31,7 @@ public class Trainer implements ITrainer {
                 }
                 break;
             default:
-                System.out.println("야생의 포켓몬 " + wildPokemon.getPokemonName() + "을(를) 그냥 지나갑니다.");
+                System.out.println("Encounter a wild Pokemon " + wildPokemon.getPokemonName() + " and pass by.");
                 break;
         }
     }
@@ -79,57 +79,57 @@ public class Trainer implements ITrainer {
 
     @Override
     public void trade(Trainer tgTrainer) {
-        System.out.println("포켓몬 트레이드를 시작합니다!");
-        // 1) 소지 포켓몬 옵션 출력 및 선택
-        // 내 포켓몬
+        System.out.println("Starting Pokemon trade!");
+        // Print and select owned Pokemon options
+        // My Pokemon
         int idx = 0;
         for (Pokemon pokemon: this.getCapturedPokemonList()) {
             System.out.println(idx + ": " + pokemon);
             idx++;
         }
-        System.out.print("교환할 내 포켓몬을 선택하세요:");
+        System.out.print("Select the Pokemon to trade:");
         int myPokemonPickIdx = inputReader.nextInt();
         Pokemon myPickedPokemon = this.capturedPokemonList.get(myPokemonPickIdx);
 
-        // 상대 포켓몬
+        // Opponent's Pokemon
         idx = 0;
         for (Pokemon pokemon: tgTrainer.getCapturedPokemonList()) {
             System.out.println(idx + ": " + pokemon);
             idx++;
         }
-        System.out.print("교환할 상대 포켓몬을 선택하세요:");
+        System.out.print("Select the opponent's Pokemon to trade:");
         int tgPokemonPickIdx = inputReader.nextInt();
         Pokemon tgPickedPokemon = tgTrainer.capturedPokemonList.get(tgPokemonPickIdx);
 
-        // 2) 교환 대상 포켓몬 확인 출력
+        // Print confirmation of Pokemon to be traded
         System.out.println(
-            "내 포켓몬 " + myPickedPokemon + " 과\n" +
-            "상대 포켓몬 " + tgPickedPokemon + " 을 교환합니다!"
+            "Trading my Pokemon " + myPickedPokemon + " with\n" +
+            "Opponent's Pokemon " + tgPickedPokemon + "!"
         );
 
-        // 3) 교환 수행
+        // Perform trade
         tgTrainer.capturedPokemonList.set(tgPokemonPickIdx, myPickedPokemon);
         this.capturedPokemonList.set(myPokemonPickIdx, tgPickedPokemon);
 
-        // 4) MysticPokemon 한정 교환 후 이벤트 발생
+        // Event occurs after trading MysticPokemon only
         Pokemon result = null;
         if (tgPickedPokemon instanceof MysticPokemon myMysticPokemon) {
-            System.out.println("트레이딩의 결과 신비의 포켓몬 " + myMysticPokemon.getPokemonName() + "이 반응합니다!");
+            System.out.println("As a result of trading, the mystical Pokemon reacts!");
             result = myMysticPokemon.getMysticAction().triggerMysticAction(myMysticPokemon);
             this.capturedPokemonList.set(myPokemonPickIdx, result);
         }
         if (myPickedPokemon instanceof MysticPokemon tgMysticPokemon) {
-            System.out.println("트레이딩의 결과 신비의 포켓몬 " + tgMysticPokemon.getPokemonName() + "이 반응합니다!");
+            System.out.println("As a result of trading, the mystical Pokemon reacts!");
             result = tgMysticPokemon.getMysticAction().triggerMysticAction(tgMysticPokemon);
             tgTrainer.capturedPokemonList.set(tgPokemonPickIdx, result);
         }
 
-        // 5) 교환 후 결과 출력
+        // Print result after trade
         System.out.println(
-            "교환 결과:\n" +
-                "\t내 포켓몬:\n" +
+            "Trade result:\n" +
+                "\tMy Pokemon:\n" +
                 "\t\t" + this.capturedPokemonList + "\n" +
-                "\t상대 포켓몬:\n" +
+                "\tOpponent's Pokemon:\n" +
                 "\t\t" + tgTrainer.capturedPokemonList
         );
     }

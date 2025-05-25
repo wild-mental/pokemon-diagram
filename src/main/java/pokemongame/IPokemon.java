@@ -5,6 +5,6 @@ public interface IPokemon {
     public void attack(Pokemon tgPokemon);
     // flee
     public void flee(int enemyLv);
-    // evolve : 향후 오버로딩 가능
+    // evolve: overloading possible in the future
     public Pokemon evolve();
 }
