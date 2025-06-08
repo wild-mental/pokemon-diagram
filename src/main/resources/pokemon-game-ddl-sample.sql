@@ -94,3 +94,27 @@ CREATE INDEX fk_pokemon_skill2
 CREATE INDEX fk_pokemon_trainer
     ON pokemon (owner)
 ;
+
+CREATE TABLE battle_result
+(
+    id           int AUTO_INCREMENT
+        PRIMARY KEY,
+    pokemon_id_1 int         NOT NULL,
+    pokemon_id_2 int         NOT NULL,
+    winner_id    int         NULL,
+    result_memo  varchar(50) NULL,
+    CONSTRAINT battle_result_ibfk_1
+        FOREIGN KEY (pokemon_id_1) REFERENCES pokemon (id),
+    CONSTRAINT battle_result_ibfk_2
+        FOREIGN KEY (pokemon_id_2) REFERENCES pokemon (id)
+)
+;
+
+CREATE INDEX fk_battleresult_pokemon_1
+    ON battle_result (pokemon_id_1)
+;
+
+CREATE INDEX fk_battleresult_pokemon_2
+    ON battle_result (pokemon_id_2)
+;
+
