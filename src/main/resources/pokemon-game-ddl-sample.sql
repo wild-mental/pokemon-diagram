@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS pokemon_game;
+CREATE DATABASE IF NOT EXISTS pokemon_game;
+USE pokemon_game;
+
 -- auto-generated definition
 CREATE TABLE poke_dex
 (
@@ -23,6 +27,33 @@ CREATE INDEX fk_evolvesfrom
 CREATE INDEX idx_monstertype
     ON poke_dex (monster_type)
 ;
+
+-- auto-generated definition
+CREATE TABLE pokemon_skills
+(
+    id           int AUTO_INCREMENT
+        PRIMARY KEY,
+    skill_name   varchar(20) NOT NULL,
+    skill_effect varchar(20) NOT NULL,
+    skill_type   varchar(10) NOT NULL,
+    skill_damage varchar(10) NOT NULL
+)
+;
+
+-- auto-generated definition
+CREATE TABLE pokemon_trainer
+(
+    id           int AUTO_INCREMENT
+        PRIMARY KEY,
+    name         varchar(20) NULL,
+    trainer_type varchar(20) NULL
+)
+;
+
+CREATE INDEX fk_trainertype_monstertype
+    ON pokemon_trainer (trainer_type)
+;
+
 
 -- auto-generated definition
 CREATE TABLE pokemon
@@ -63,30 +94,3 @@ CREATE INDEX fk_pokemon_skill2
 CREATE INDEX fk_pokemon_trainer
     ON pokemon (owner)
 ;
-
--- auto-generated definition
-CREATE TABLE pokemon_skills
-(
-    id           int AUTO_INCREMENT
-        PRIMARY KEY,
-    skill_name   varchar(20) NOT NULL,
-    skill_effect varchar(20) NOT NULL,
-    skill_type   varchar(10) NOT NULL,
-    skill_damage varchar(10) NOT NULL
-)
-;
-
--- auto-generated definition
-CREATE TABLE pokemon_trainer
-(
-    id           int AUTO_INCREMENT
-        PRIMARY KEY,
-    name         varchar(20) NULL,
-    trainer_type varchar(20) NULL
-)
-;
-
-CREATE INDEX fk_trainertype_monstertype
-    ON pokemon_trainer (trainer_type)
-;
-
